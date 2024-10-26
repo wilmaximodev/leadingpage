@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Orçamento</title>
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+    <div class="leadingpage">
+        <h1>Impressão e Encadernação</h1>
+        <h3>Orçamento</h3>
+        <form>
+            <label for="product">Simule seu pedido</label>
+            <div class="options">
+                <label>
+                    <input type="radio" name="cor" checked /> Preto e Branco
+                </label>
+                <label>
+                    <input type="radio" name="cor"/> Colorido
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="lado" checked /> Só Frente
+                </label>
+                <label>
+                    <input type="radio" name="lado"/> Frente e Verso
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="encadernado" checked /> Sem Encadernação
+                </label>
+                <label>
+                    <input type="radio" name="encadernado"/> Com Encadernação
+                </label>
+                <br>
+                <label for="quantidade">
+                    Quantidade:
+                    <input type="number" id="quantidade" min="0" max="1000" value="0">
+                </label>
+            </div>
+
+            <div class="image-section">
+                <img src="../img/encadernacao.jpg" alt="encadernacao" id="img1" />
+                <img src="../img/colorida.jpg" alt="Descrição da Imagem 2" id="img2" />
+                <img src="../img/peb.png" alt="Descrição da Imagem 3" id="img3" />
+            </div>
+            <label for="valor">
+                <h2>Valor total: R$00,00</h2>
+            </label>
+            <button type="submit">Enviar Pedido</button>
+        </form>
+    </div>
+</body>
+</html>

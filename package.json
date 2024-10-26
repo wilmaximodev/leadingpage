@@ -1,0 +1,11 @@
+{
+  "name": "leadingpage",
+  "version": "1.0.0",
+  "description": "Pasta criada para os arquivos do projeto de leading page para o site da lan house Resolve no Digital",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Wilson Maximus",
+  "license": "ISC"
+}
