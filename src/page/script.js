@@ -25,6 +25,12 @@ const atualizarValor = () => {
         `Preço por Página: R$${formatarMoeda(precoAtual)}`;
     valorTotal.innerHTML =
         `Valor Total: R$${formatarMoeda(qtd * precoAtual)}`;
+    
+    const max = 3000;
+    if (qtd > max) {
+        quantidade.value = max;
+        atualizarValor();
+    }
 }
 
 window.onload = () => {
