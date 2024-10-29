@@ -33,10 +33,11 @@
                 <label>
                     <input type="radio" name="encadernado"/> Com Encadernação
                 </label>
+                <h3 id="precoPorPagina">Valor por Página: R$00,00</h3>
                 <br>
                 <label for="quantidade">
                     Quantidade:
-                    <input type="number" id="quantidade" min="0" max="1000" value="0">
+                    <input type="number" id="quantidade" min="1" value="1">
                 </label>
             </div>
 
@@ -46,10 +47,11 @@
                 <img src="../img/peb.png" alt="Descrição da Imagem 3" id="img3" />
             </div>
             <label for="valor">
-                <h2>Valor total: R$00,00</h2>
+                <h2 id="valorTotal">Valor total: R$1,00</h2>
             </label>
             <button type="submit">Enviar Pedido</button>
         </form>
     </div>
+    <script src="./index.js"></script>
 </body>
 </html>

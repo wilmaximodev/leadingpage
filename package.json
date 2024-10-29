@@ -4,8 +4,28 @@
   "description": "Pasta criada para os arquivos do projeto de leading page para o site da lan house Resolve no Digital",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "lint": "eslint ."
   },
   "author": "Wilson Maximus",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "eslint": "^9.13.0",
+    "eslint-plugin-react": "^7.37.2",
+    "globals": "^15.11.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wilmaximodev/leadingpage.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/wilmaximodev/leadingpage/issues"
+  },
+  "homepage": "https://github.com/wilmaximodev/leadingpage#readme",
+  "dependencies": {
+    "eslint-config-trybe-fundamentals": "^1.1.1",
+    "lint": "^0.8.19"
+  }
 }

@@ -90,6 +90,7 @@ input[type="number"] {
 
 .image-section img:hover {
     transform: scale(1.05); /* Aumenta a imagem ao passar o mouse */
+    
 }
 
 /* Estilização do valor total */
