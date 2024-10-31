@@ -10,30 +10,31 @@
     <div class="leadingpage">
         <h1>Impressão e Encadernação</h1>
         <h3>Orçamento</h3>
-        <form>
+        <form id="meuFormulario">
             <label for="product">Simule seu pedido</label>
             <div class="options">
+                <input type="radio" name="cor" checked />
+                <label for="">Preto e Branco</label>
+
                 <label>
-                    <input type="radio" name="cor" checked /> Preto e Branco
-                </label>
-                <label>
-                    <input type="radio" name="cor"/> Colorido
+                    <input type="radio" id="colorido" name="cor"/> Colorido
                 </label>
                 <br>
                 <label>
                     <input type="radio" name="lado" checked /> Só Frente
                 </label>
                 <label>
-                    <input type="radio" name="lado"/> Frente e Verso
+                    <input type="radio" id="frenteEVerso" name="lado"/> Frente e Verso
                 </label>
                 <br>
                 <label>
                     <input type="radio" name="encadernado" checked /> Sem Encadernação
                 </label>
                 <label>
-                    <input type="radio" name="encadernado"/> Com Encadernação
+                    <input type="radio" id="sim" name="encadernado"/> Com Encadernação
                 </label>
-                <h3 id="precoPorPagina">Valor por Página: R$00,00</h3>
+                <h3 id="valorPorPagina">Valor por Página: R$1,00</h3>
+                <h3 id="valorEncadernacao"></h3>
                 <br>
                 <label for="quantidade">
                     Quantidade:
