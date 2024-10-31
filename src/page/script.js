@@ -31,7 +31,7 @@ const calcularPrecoEncadernacao = (qtd) => {
         { limite: 500, preco: 25.00 },
         { limite: 1000, preco: 45.00 },
     ];
-    const faixa = precos.find(({ limite }) => qtd <= limite);
+    const faixa = precos.find(({ limite  }) => qtd <= limite);
     return faixa ? faixa.preco : 6.00;
 };
 
