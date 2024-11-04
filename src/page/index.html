@@ -13,33 +13,35 @@
         <form id="meuFormulario">
             <label for="product">Simule seu pedido</label>
             <div class="options">
-                <input type="radio" name="cor" checked />
-                <label for="">Preto e Branco</label>
+                <input type="radio" id="pretoEBranco" name="cor" checked />
+                <label for="pretoEBranco">Preto e Branco</label>
 
-                <label>
-                    <input type="radio" id="colorido" name="cor"/> Colorido
-                </label>
+                <input type="radio" id="colorido" name="cor"/>
+                <label for="colorido">Colorido</label>
+
                 <br>
-                <label>
-                    <input type="radio" name="lado" checked /> Só Frente
-                </label>
-                <label>
-                    <input type="radio" id="frenteEVerso" name="lado"/> Frente e Verso
-                </label>
+                <input type="radio" id="frente" name="lado" checked />
+                <label for="frente">Só Frente</label>
+                
+                <input type="radio" id="frenteEVerso" name="lado"/>
+                <label for="frenteEVerso">Frente e Verso</label>
+                
                 <br>
-                <label>
-                    <input type="radio" name="encadernado" checked /> Sem Encadernação
-                </label>
-                <label>
-                    <input type="radio" id="sim" name="encadernado"/> Com Encadernação
-                </label>
-                <h3 id="valorPorPagina">Valor por Página: R$1,00</h3>
-                <h3 id="valorEncadernacao"></h3>
+                <input type="radio" id="semEncadernacao" name="encadernado" checked />
+                <label for="semEncadernacao">Sem Encadernação</label>
+                
+                <input type="radio" id="comEncadernacao" name="encadernado"/>
+                <label for="comEncadernacao">Com Encadernação</label>
+
+                <section class="saidaDeValores">
+                    <h3 id="valorPorPagina">Valor por Página: R$1,00</h3>
+                    <h3 id="valorEncadernacao"></h3>
+                </section>
                 <br>
                 <label for="quantidade">
-                    Quantidade:
-                    <input type="number" id="quantidade" max="3000" min="1" value="1">
+                    Quantidade de Folhas:
                 </label>
+                <input type="number" id="quantidade" max="3000" min="1" value="1">
             </div>
 
             <div class="image-section">

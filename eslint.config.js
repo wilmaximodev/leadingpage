@@ -10,7 +10,7 @@ module.exports = [
     rules: {
       "indent": ["error", 2, { "SwitchCase": 1 }],
       "array-bracket-newline": ["error", { "multiline": true }],
-      "object-curly-newline": ["error", { "multiline": true, "consistent": true }], 
+      "object-curly-newline": ["error", { "multiline": true, "consistent": true }],
       "arrow-spacing": ["error", { "before": true, "after": true }],
       "object-curly-spacing": ["error", "always"],
       "no-multi-spaces": "error",
