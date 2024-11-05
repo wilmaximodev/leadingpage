@@ -1,13 +1,14 @@
 const formulario = document.getElementById('meuFormulario');
 const valorTotal = document.getElementById('valorTotal');
-const quantidade = document.getElementById('quantidade');
 const valorPorPagina = document.getElementById('valorPorPagina');
 const valorEncadernacao = document.getElementById('valorEncadernacao');
+const quantidadeDePaginas = document.getElementById('quantidadeDePaginas');
+const quantidaDeFolhas = document.getElementById('quantidadeDeFolhas');
 const encadernacao = document.getElementsByName('encadernado');
 const frenteEVerso = document.getElementsByName('lado');
 const corOuPEB = document.getElementsByName('cor');
+const eFrenteEVerso = document.getElementById('frenteEVerso');
 let encadernacaoChecked = false;
-let eFrenteEVerso = false;
 
 const formatarMoeda = (numero) => {
   return numero.toFixed(2).replace('.', ',');
@@ -18,7 +19,7 @@ const calcularPrecoImpressao = (qtd) => {
     { limite: 1000, preco: 0.25 },
     { limite: 500, preco: 0.40 },
     { limite: 150, preco: 0.45 },
-    { limite: 50, preco: 0.70 },
+    { limite: 50, preco: 0.50 },
   ];
   const faixa = precos.find(({ limite }) => qtd >= limite);
   return faixa ? faixa.preco : 1;
@@ -52,18 +53,18 @@ const comOuSemEncadernacao = (valor) => {
 };
 
 const atualizarValorImpressao = () => {
-  const qtd = parseInt(quantidade.value) || 0;
+  const qtd = parseInt(quantidadeDePaginas.value) || 0;
   const precoImpressao = calcularPrecoImpressao(qtd);
   valorPorPagina.innerHTML = `Valor por Página: R$${formatarMoeda(precoImpressao)}`;
 
   const max = 3000;
   if (qtd > max) {
-    quantidade.value = max;
+    quantidadeDePaginas.value = max;
   }
 };
 
 const atualizarValorTotal = () => {
-  const qtd = parseInt(quantidade.value) || 0;
+  const qtd = parseInt(quantidadeDePaginas.value) || 0;
   const precoEncadernacao = encadernacaoChecked ? calcularPrecoEncadernacao(qtd) : 0;
   const precoImpressao = calcularPrecoImpressao(qtd);
 
@@ -71,18 +72,25 @@ const atualizarValorTotal = () => {
 };
 
 const atualizarValorEncadernacao = () => {
-  const qtd = parseInt(quantidade.value) || 0;
+  const qtd = parseInt(quantidadeDePaginas.value) || 0;
   const precoEncadernacao = calcularPrecoEncadernacao(qtd);
   comOuSemEncadernacao(precoEncadernacao);
 };
 
-const frenteEVersoSelecionado = (e) => {
-  const id = e.target.id;
-  const labelTexto = document.querySelector(`label[for="${id}"]`).innerText;
-  if (labelTexto === "Frente e Verso") {
+const frenteEVersoSelecionado = () => {
 
+  for (e of frenteEVerso) {
+    if (e.checked) {
+      if (e.id === eFrenteEVerso.id) {
+        let quantidadeAtual = quantidadeDePaginas.value ;
+        quantidaDeFolhas.innerHTML = `Quantidade de folhas: ${quantidadeAtual}`;
+      } else {
+        quantidaDeFolhas.innerHTML = '';
+      }
+    }
   }
-  console.log(labelTexto);
+
+  console.log(frenteEVerso);
 };
 
 
@@ -99,14 +107,15 @@ const executarFuncoes = () => {
   atualizarValorEncadernacao();
   atualizarValorImpressao();
   atualizarValorTotal();
+  frenteEVersoSelecionado()
 };
 
 window.onload = () => {
-  quantidade.addEventListener('input', executarFuncoes);
+  quantidadeDePaginas.addEventListener('input', executarFuncoes);
 
   encadernacao.forEach((e) =>
     e.addEventListener('click', () => {
-      const qtd = parseInt(quantidade.value) || 0;
+      const qtd = parseInt(quantidadeDePaginas.value) || 0;
       const precoEncadernacao = calcularPrecoEncadernacao(qtd);
       comOuSemEncadernacao(precoEncadernacao);
       atualizarValorTotal();
@@ -114,7 +123,7 @@ window.onload = () => {
   );
 
   frenteEVerso.forEach((e) => {
-    e.addEventListener('click', (e) => frenteEVersoSelecionado(e));
+    e.addEventListener('click', () => frenteEVersoSelecionado());
   });
 
   submitFormulario();
