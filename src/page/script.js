@@ -8,7 +8,10 @@ const encadernacao = document.getElementsByName('encadernado');
 const frenteEVerso = document.getElementsByName('lado');
 const corOuPEB = document.getElementsByName('cor');
 const eFrenteEVerso = document.getElementById('frenteEVerso');
-let encadernacaoChecked = false;
+const checkeds = [{
+  encadernacaoChecked: false,
+  frenteEVersoChecked: false,
+}];
 
 const formatarMoeda = (numero) => {
   return numero.toFixed(2).replace('.', ',');
@@ -43,10 +46,10 @@ const comOuSemEncadernacao = (valor) => {
       if (e.id === 'comEncadernacao') {
         valorEncadernacao.innerHTML =
                     `Valor da Encadernação: R$${formatarMoeda(valor)}`;
-        encadernacaoChecked = true;
+        checkeds.encadernacaoChecked = true;
       } else {
         valorEncadernacao.innerHTML = '';
-        encadernacaoChecked = false;
+        checkeds.encadernacaoChecked = false;
       }
     }
   }
@@ -65,7 +68,7 @@ const atualizarValorImpressao = () => {
 
 const atualizarValorTotal = () => {
   const qtd = parseInt(quantidadeDePaginas.value) || 0;
-  const precoEncadernacao = encadernacaoChecked ? calcularPrecoEncadernacao(qtd) : 0;
+  const precoEncadernacao = checkeds.encadernacaoChecked ? calcularPrecoEncadernacao(qtd) : 0;
   const precoImpressao = calcularPrecoImpressao(qtd);
 
   valorTotal.innerHTML = `Valor Total: R$${formatarMoeda(qtd * precoImpressao + precoEncadernacao)}`;
@@ -77,20 +80,29 @@ const atualizarValorEncadernacao = () => {
   comOuSemEncadernacao(precoEncadernacao);
 };
 
+
+const processarNumero = (numero) => {
+  if (numero % 2 === 0) {
+    return numero /2;
+  } else {
+    return (numero - 1) / 2 + 1;
+  }
+};
+
 const frenteEVersoSelecionado = () => {
+  let quantidadeAtual = processarNumero(quantidadeDePaginas.value);
 
   for (e of frenteEVerso) {
     if (e.checked) {
       if (e.id === eFrenteEVerso.id) {
-        let quantidadeAtual = quantidadeDePaginas.value ;
-        quantidaDeFolhas.innerHTML = `Quantidade de folhas: ${quantidadeAtual}`;
+        quantidaDeFolhas.innerHTML = `Quantidade de Folhas: ${quantidadeAtual}`;
       } else {
         quantidaDeFolhas.innerHTML = '';
       }
     }
   }
 
-  console.log(frenteEVerso);
+  console.log(quantidadeAtual);
 };
 
 
