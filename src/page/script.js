@@ -4,14 +4,10 @@ const valorPorPagina = document.getElementById('valorPorPagina');
 const valorEncadernacao = document.getElementById('valorEncadernacao');
 const quantidadeDePaginas = document.getElementById('quantidadeDePaginas');
 const quantidaDeFolhas = document.getElementById('quantidadeDeFolhas');
-const encadernacao = document.getElementsByName('encadernado');
-const frenteEVerso = document.getElementsByName('lado');
+const encadernacao = [...document.getElementsByName('encadernado')];
+const frenteEVerso = [...document.getElementsByName('lado')];
 const corOuPEB = document.getElementsByName('cor');
 const eFrenteEVerso = document.getElementById('frenteEVerso');
-const checkeds = [{
-  encadernacaoChecked: false,
-  frenteEVersoChecked: false,
-}];
 
 const formatarMoeda = (numero) => {
   return numero.toFixed(2).replace('.', ',');
@@ -40,46 +36,55 @@ const calcularPrecoEncadernacao = (qtd) => {
   return faixa ? faixa.preco : 6.00;
 };
 
-const comOuSemEncadernacao = (valor) => {
-  for (e of encadernacao) {
-    if (e.checked) {
-      if (e.id === 'comEncadernacao') {
-        valorEncadernacao.innerHTML =
-                    `Valor da Encadernação: R$${formatarMoeda(valor)}`;
-        checkeds.encadernacaoChecked = true;
-      } else {
-        valorEncadernacao.innerHTML = '';
-        checkeds.encadernacaoChecked = false;
-      }
-    }
+const comOuSemEncadernacao = () => {
+
+  const { qtdDeFolhas, tipoEncadernacao } = obterValoresAtuais();
+  const valor = calcularPrecoEncadernacao(qtdDeFolhas);
+
+  if (tipoEncadernacao=== 'comEncadernacao') {
+    valorEncadernacao.innerHTML =
+      `Valor da Encadernação: R$${formatarMoeda(valor)}`;
+  } else {
+    valorEncadernacao.innerHTML = '';
   }
 };
 
 const atualizarValorImpressao = () => {
-  const qtd = parseInt(quantidadeDePaginas.value) || 0;
-  const precoImpressao = calcularPrecoImpressao(qtd);
-  valorPorPagina.innerHTML = `Valor por Página: R$${formatarMoeda(precoImpressao)}`;
+  const { qtdDePaginas, qtdDeFolhas } = obterValoresAtuais();
+  const precoImpressao = calcularPrecoImpressao(qtdDePaginas);
+  valorPorPagina.innerHTML =
+    `Valor por Página: R$${formatarMoeda(precoImpressao)}`;
 
   const max = 3000;
-  if (qtd > max) {
+  if (qtdDeFolhas > max) {
     quantidadeDePaginas.value = max;
   }
 };
 
 const atualizarValorTotal = () => {
-  const qtd = parseInt(quantidadeDePaginas.value) || 0;
-  const precoEncadernacao = checkeds.encadernacaoChecked ? calcularPrecoEncadernacao(qtd) : 0;
-  const precoImpressao = calcularPrecoImpressao(qtd);
+  const { qtdDePaginas, tipoEncadernacao, qtdDeFolhas } = obterValoresAtuais();
 
-  valorTotal.innerHTML = `Valor Total: R$${formatarMoeda(qtd * precoImpressao + precoEncadernacao)}`;
+  const precoEncadernacao =
+    tipoEncadernacao === 'comEncadernacao' ? calcularPrecoEncadernacao(qtdDeFolhas) : 0;
+
+  const precoImpressao = calcularPrecoImpressao(qtdDePaginas);
+
+  valorTotal.innerHTML = `Valor Total: R$${formatarMoeda(qtdDePaginas * precoImpressao + precoEncadernacao)}`;
 };
 
 const atualizarValorEncadernacao = () => {
-  const qtd = parseInt(quantidadeDePaginas.value) || 0;
-  const precoEncadernacao = calcularPrecoEncadernacao(qtd);
+  const { qtdDeFolhas, qtdDePaginas, tipoFrenteEVerso } = obterValoresAtuais();
+
+  let valorAtual = qtdDePaginas;
+  if (tipoFrenteEVerso === 'frenteEVerso') {
+    valorAtual = qtdDeFolhas;
+  }
+
+  console.log('Valor Atual: ', valorAtual);
+
+  const precoEncadernacao = calcularPrecoEncadernacao(valorAtual);
   comOuSemEncadernacao(precoEncadernacao);
 };
-
 
 const processarNumero = (numero) => {
   if (numero % 2 === 0) {
@@ -90,19 +95,13 @@ const processarNumero = (numero) => {
 };
 
 const frenteEVersoSelecionado = () => {
-  let quantidadeAtual = processarNumero(quantidadeDePaginas.value);
+  const { qtdDeFolhas, tipoFrenteEVerso } = obterValoresAtuais();
 
-  for (e of frenteEVerso) {
-    if (e.checked) {
-      if (e.id === eFrenteEVerso.id) {
-        quantidaDeFolhas.innerHTML = `Quantidade de Folhas: ${quantidadeAtual}`;
-      } else {
-        quantidaDeFolhas.innerHTML = '';
-      }
-    }
+  if (tipoFrenteEVerso === 'frenteEVerso') {
+    quantidaDeFolhas.innerHTML = `Quantidade de Folhas: ${qtdDeFolhas}`;
+  } else {
+    quantidaDeFolhas.innerHTML = '';
   }
-
-  console.log(quantidadeAtual);
 };
 
 
@@ -113,6 +112,23 @@ const submitFormulario = () => {
     console.log('Submit clicado');
 
   });
+};
+
+
+const obterValoresAtuais = () => {
+  let qtdDePaginas = parseInt(quantidadeDePaginas.value) || 0;
+  let qtdDeFolhas = processarNumero(qtdDePaginas);
+
+  const tipoEncadernacao = encadernacao.find(e => e.checked)?.id || null;
+  const tipoFrenteEVerso = frenteEVerso.find(e => e.checked)?.id || null;
+
+
+  return {
+    qtdDeFolhas,
+    qtdDePaginas,
+    tipoEncadernacao,
+    tipoFrenteEVerso
+  };
 };
 
 const executarFuncoes = () => {
@@ -127,15 +143,32 @@ window.onload = () => {
 
   encadernacao.forEach((e) =>
     e.addEventListener('click', () => {
-      const qtd = parseInt(quantidadeDePaginas.value) || 0;
-      const precoEncadernacao = calcularPrecoEncadernacao(qtd);
-      comOuSemEncadernacao(precoEncadernacao);
+      comOuSemEncadernacao();
       atualizarValorTotal();
     })
   );
 
+  const {
+    tipoEncadernacao,
+    tipoFrenteEVerso,
+    qtdDeFolhas,
+    qtdDePaginas
+  } = obterValoresAtuais();
+
+  console.log("Tipo de Encadernação: ", tipoEncadernacao);
+
+  console.log("Tipo de Frente e Verso: ", tipoFrenteEVerso);
+
+  console.log("Quantidade de Folhas: ", qtdDeFolhas);
+
+
+  console.log("Quantidade de Páginas: ", qtdDePaginas);
+
   frenteEVerso.forEach((e) => {
-    e.addEventListener('click', () => frenteEVersoSelecionado());
+    e.addEventListener('click', () => {
+      frenteEVersoSelecionado();
+      executarFuncoes();
+    });
   });
 
   submitFormulario();
