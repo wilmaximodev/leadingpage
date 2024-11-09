@@ -30,7 +30,7 @@
                 <input type="radio" id="semEncadernacao" name="encadernado" checked />
                 <label for="semEncadernacao">Sem Encadernação</label>
                 
-                <input type="radio" id="comEncadernacao" name="encadernado"/>
+                <input type="radio" id="comEncadernacao" name="encadernacao"/>
                 <label for="comEncadernacao">Com Encadernação</label>
 
                 <section class="saidaDeValores">
@@ -41,6 +41,7 @@
                         Quantidade de Páginas:
                         <input type="number" id="quantidadeDePaginas" max="3000" min="1" value="1">
                     </label>
+                    <small id="avisoValorMaximo" style="color: red; display: none;">O valor máximo é 3000.</small>
                 </section>
                 <br>
             </div>
@@ -51,7 +52,7 @@
                 <img src="../img/peb.png" alt="Descrição da Imagem 3" id="img3" />
             </section>
             <label for="valor">
-                <h2 id="valorTotal">Valor total: R$1,00</h2>
+                <h2 id="valorTotal">Valor Total: R$1,00</h2>
             </label>
             <button type="submit">Enviar Pedido</button>
         </form>

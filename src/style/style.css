@@ -8,7 +8,7 @@
 /* Estilização do corpo */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9; /* Cor de fundo suave */
+    background-color: #082767;
     color: #333; /* Cor do texto */
     line-height: 1.6;
     padding: 20px;
@@ -48,6 +48,11 @@ form {
     display: flex;
     flex-direction: column; /* Alinha os itens verticalmente */
 }
+
+input:disabled {
+    background-color: #f0f0f0;
+    color: #aaa;
+  }
 
 label {
     margin-bottom: 10px; /* Espaço entre os labels */

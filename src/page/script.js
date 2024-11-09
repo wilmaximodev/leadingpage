@@ -3,15 +3,13 @@ const valorTotal = document.getElementById('valorTotal');
 const valorPorPagina = document.getElementById('valorPorPagina');
 const valorEncadernacao = document.getElementById('valorEncadernacao');
 const quantidadeDePaginas = document.getElementById('quantidadeDePaginas');
-const quantidaDeFolhas = document.getElementById('quantidadeDeFolhas');
+const quantidadeDeFolhas = document.getElementById('quantidadeDeFolhas');
 const encadernacao = [...document.getElementsByName('encadernado')];
 const frenteEVerso = [...document.getElementsByName('lado')];
 const corOuPEB = document.getElementsByName('cor');
 const eFrenteEVerso = document.getElementById('frenteEVerso');
-
-const formatarMoeda = (numero) => {
-  return numero.toFixed(2).replace('.', ',');
-};
+const avisoValorMaximo = document.getElementById('avisoValorMaximo');
+const quantidadeMaxima = 3000;
 
 const calcularPrecoImpressao = (qtd) => {
   const precos = [
@@ -36,29 +34,43 @@ const calcularPrecoEncadernacao = (qtd) => {
   return faixa ? faixa.preco : 6.00;
 };
 
-const comOuSemEncadernacao = () => {
+const formatarValor = (numero) => numero.toFixed(2).replace('.', ',');
 
-  const { qtdDeFolhas, tipoEncadernacao } = obterValoresAtuais();
-  const valor = calcularPrecoEncadernacao(qtdDeFolhas);
+const processarNumero = (numero) => numero % 2 === 0 ? numero / 2 : (numero - 1) / 2 + 1;
 
-  if (tipoEncadernacao=== 'comEncadernacao') {
-    valorEncadernacao.innerHTML =
-      `Valor da Encadernação: R$${formatarMoeda(valor)}`;
-  } else {
-    valorEncadernacao.innerHTML = '';
-  }
+const calcularValorTotal = (paginas, preco, encadernacao) =>
+  paginas * preco + encadernacao;
+
+const obterValoresAtuais = () => {
+  let qtdDePaginas = parseInt(quantidadeDePaginas.value) || 0;
+  let qtdDeFolhas = processarNumero(qtdDePaginas);
+
+  const tipoEncadernacao = encadernacao.find(e => e.checked)?.id || null;
+  const tipoFrenteEVerso = frenteEVerso.find(e => e.checked)?.id || null;
+
+  return {
+    qtdDeFolhas,
+    qtdDePaginas,
+    tipoEncadernacao,
+    tipoFrenteEVerso
+  };
 };
 
 const atualizarValorImpressao = () => {
-  const { qtdDePaginas, qtdDeFolhas } = obterValoresAtuais();
+  const { qtdDePaginas } = obterValoresAtuais();
   const precoImpressao = calcularPrecoImpressao(qtdDePaginas);
   valorPorPagina.innerHTML =
-    `Valor por Página: R$${formatarMoeda(precoImpressao)}`;
+    `Valor por Página: R$${formatarValor(precoImpressao)}`;
+};
 
-  const max = 3000;
-  if (qtdDeFolhas > max) {
-    quantidadeDePaginas.value = max;
-  }
+const atualizarValorEncadernacao = () => {
+  const { qtdDeFolhas, tipoEncadernacao } = obterValoresAtuais();
+  const valor = calcularPrecoEncadernacao(qtdDeFolhas);
+
+  tipoEncadernacao === 'comEncadernacao' ?
+    valorEncadernacao.innerHTML =
+      `Valor da Encadernação: R$${formatarValor(valor)}` :
+    valorEncadernacao.innerHTML = '';
 };
 
 const atualizarValorTotal = () => {
@@ -69,41 +81,18 @@ const atualizarValorTotal = () => {
 
   const precoImpressao = calcularPrecoImpressao(qtdDePaginas);
 
-  valorTotal.innerHTML = `Valor Total: R$${formatarMoeda(qtdDePaginas * precoImpressao + precoEncadernacao)}`;
-};
+  let novoValor = calcularValorTotal(qtdDePaginas, precoImpressao, precoEncadernacao);
 
-const atualizarValorEncadernacao = () => {
-  const { qtdDeFolhas, qtdDePaginas, tipoFrenteEVerso } = obterValoresAtuais();
-
-  let valorAtual = qtdDePaginas;
-  if (tipoFrenteEVerso === 'frenteEVerso') {
-    valorAtual = qtdDeFolhas;
-  }
-
-  console.log('Valor Atual: ', valorAtual);
-
-  const precoEncadernacao = calcularPrecoEncadernacao(valorAtual);
-  comOuSemEncadernacao(precoEncadernacao);
-};
-
-const processarNumero = (numero) => {
-  if (numero % 2 === 0) {
-    return numero /2;
-  } else {
-    return (numero - 1) / 2 + 1;
-  }
+  valorTotal.innerHTML = `Valor Total: R$${formatarValor(novoValor)}`;
 };
 
 const frenteEVersoSelecionado = () => {
   const { qtdDeFolhas, tipoFrenteEVerso } = obterValoresAtuais();
 
-  if (tipoFrenteEVerso === 'frenteEVerso') {
-    quantidaDeFolhas.innerHTML = `Quantidade de Folhas: ${qtdDeFolhas}`;
-  } else {
-    quantidaDeFolhas.innerHTML = '';
-  }
+  tipoFrenteEVerso === 'frenteEVerso' ?
+    quantidadeDeFolhas.innerHTML = `Quantidade de Folhas: ${qtdDeFolhas}` :
+    quantidadeDeFolhas.innerHTML = '';
 };
-
 
 const submitFormulario = () => {
   formulario.addEventListener('submit', (event) => {
@@ -114,23 +103,6 @@ const submitFormulario = () => {
   });
 };
 
-
-const obterValoresAtuais = () => {
-  let qtdDePaginas = parseInt(quantidadeDePaginas.value) || 0;
-  let qtdDeFolhas = processarNumero(qtdDePaginas);
-
-  const tipoEncadernacao = encadernacao.find(e => e.checked)?.id || null;
-  const tipoFrenteEVerso = frenteEVerso.find(e => e.checked)?.id || null;
-
-
-  return {
-    qtdDeFolhas,
-    qtdDePaginas,
-    tipoEncadernacao,
-    tipoFrenteEVerso
-  };
-};
-
 const executarFuncoes = () => {
   atualizarValorEncadernacao();
   atualizarValorImpressao();
@@ -138,31 +110,26 @@ const executarFuncoes = () => {
   frenteEVersoSelecionado()
 };
 
-window.onload = () => {
-  quantidadeDePaginas.addEventListener('input', executarFuncoes);
+document.addEventListener('DOMContentLoaded', () => {
+  quantidadeDePaginas.addEventListener('input', () => {
+    const { qtdDeFolhas } = obterValoresAtuais();
+
+    executarFuncoes();
+
+    if (qtdDeFolhas > quantidadeMaxima) {
+      quantidadeDePaginas.value = quantidadeMaxima;
+      avisoValorMaximo.style.display = 'inline';
+    } else {
+      avisoValorMaximo.style.display = 'none'; // Esconde o aviso
+    }
+  });
 
   encadernacao.forEach((e) =>
     e.addEventListener('click', () => {
-      comOuSemEncadernacao();
+      atualizarValorEncadernacao();
       atualizarValorTotal();
     })
   );
-
-  const {
-    tipoEncadernacao,
-    tipoFrenteEVerso,
-    qtdDeFolhas,
-    qtdDePaginas
-  } = obterValoresAtuais();
-
-  console.log("Tipo de Encadernação: ", tipoEncadernacao);
-
-  console.log("Tipo de Frente e Verso: ", tipoFrenteEVerso);
-
-  console.log("Quantidade de Folhas: ", qtdDeFolhas);
-
-
-  console.log("Quantidade de Páginas: ", qtdDePaginas);
 
   frenteEVerso.forEach((e) => {
     e.addEventListener('click', () => {
@@ -172,4 +139,4 @@ window.onload = () => {
   });
 
   submitFormulario();
-};
+});
