@@ -1,15 +1,20 @@
+//Buscando elementos do HTML
+
 const formulario = document.getElementById('meuFormulario');
 const valorTotal = document.getElementById('valorTotal');
 const valorPorPagina = document.getElementById('valorPorPagina');
 const valorEncadernacao = document.getElementById('valorEncadernacao');
 const quantidadeDePaginas = document.getElementById('quantidadeDePaginas');
 const quantidadeDeFolhas = document.getElementById('quantidadeDeFolhas');
-const encadernacao = [...document.getElementsByName('encadernado')];
+const encadernacao = [...document.getElementsByName('encadernacao')];
 const frenteEVerso = [...document.getElementsByName('lado')];
 const corOuPEB = document.getElementsByName('cor');
 const eFrenteEVerso = document.getElementById('frenteEVerso');
 const avisoValorMaximo = document.getElementById('avisoValorMaximo');
 const quantidadeMaxima = 3000;
+const buttonSubmit = document.getElementById('submit');
+
+//Funções para cálculos e formatação de valores
 
 const calcularPrecoImpressao = (qtd) => {
   const precos = [
@@ -41,8 +46,11 @@ const processarNumero = (numero) => numero % 2 === 0 ? numero / 2 : (numero - 1)
 const calcularValorTotal = (paginas, preco, encadernacao) =>
   paginas * preco + encadernacao;
 
+
+//Funções para atualizar valores no HTML
+
 const obterValoresAtuais = () => {
-  let qtdDePaginas = parseInt(quantidadeDePaginas.value) || 0;
+  let qtdDePaginas = parseInt(quantidadeDePaginas?.value) || 0;
   let qtdDeFolhas = processarNumero(qtdDePaginas);
 
   const tipoEncadernacao = encadernacao.find(e => e.checked)?.id || null;
@@ -59,7 +67,7 @@ const obterValoresAtuais = () => {
 const atualizarValorImpressao = () => {
   const { qtdDePaginas } = obterValoresAtuais();
   const precoImpressao = calcularPrecoImpressao(qtdDePaginas);
-  valorPorPagina.innerHTML =
+  valorPorPagina.textContent =
     `Valor por Página: R$${formatarValor(precoImpressao)}`;
 };
 
@@ -68,9 +76,9 @@ const atualizarValorEncadernacao = () => {
   const valor = calcularPrecoEncadernacao(qtdDeFolhas);
 
   tipoEncadernacao === 'comEncadernacao' ?
-    valorEncadernacao.innerHTML =
+    valorEncadernacao.textContent =
       `Valor da Encadernação: R$${formatarValor(valor)}` :
-    valorEncadernacao.innerHTML = '';
+    valorEncadernacao.textContent = '';
 };
 
 const atualizarValorTotal = () => {
@@ -83,23 +91,23 @@ const atualizarValorTotal = () => {
 
   let novoValor = calcularValorTotal(qtdDePaginas, precoImpressao, precoEncadernacao);
 
-  valorTotal.innerHTML = `Valor Total: R$${formatarValor(novoValor)}`;
+  valorTotal.textContent = `Valor Total: R$${formatarValor(novoValor)}`;
 };
 
 const frenteEVersoSelecionado = () => {
   const { qtdDeFolhas, tipoFrenteEVerso } = obterValoresAtuais();
 
   tipoFrenteEVerso === 'frenteEVerso' ?
-    quantidadeDeFolhas.innerHTML = `Quantidade de Folhas: ${qtdDeFolhas}` :
-    quantidadeDeFolhas.innerHTML = '';
+    quantidadeDeFolhas.textContent = `Quantidade de Folhas: ${qtdDeFolhas}` :
+    quantidadeDeFolhas.textContent = '';
 };
+
+//Função para submeter o formulário
 
 const submitFormulario = () => {
   formulario.addEventListener('submit', (event) => {
     event.preventDefault();
-
-    console.log('Submit clicado');
-
+    console.log('Submit clicado:', formulario);
   });
 };
 
@@ -109,6 +117,8 @@ const executarFuncoes = () => {
   atualizarValorTotal();
   frenteEVersoSelecionado()
 };
+
+//Eventos
 
 document.addEventListener('DOMContentLoaded', () => {
   quantidadeDePaginas.addEventListener('input', () => {
@@ -120,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
       quantidadeDePaginas.value = quantidadeMaxima;
       avisoValorMaximo.style.display = 'inline';
     } else {
-      avisoValorMaximo.style.display = 'none'; // Esconde o aviso
+      avisoValorMaximo.style.display = 'none';
     }
   });
 
