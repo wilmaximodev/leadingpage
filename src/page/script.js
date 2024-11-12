@@ -48,6 +48,9 @@ const calcularValorTotal = (paginas, preco, encadernacao) =>
 
 //Funções para atualizar valores no HTML
 
+const seEFrente = (tipoFrenteEVerso, qtdDePaginas, qtdDeFolhas) =>
+  tipoFrenteEVerso === 'frenteEVerso' ? qtdDeFolhas : qtdDePaginas;
+
 const obterValoresAtuais = () => {
   const qtdDePaginas = parseInt(quantidadeDePaginas?.value) || 0;
   const qtdDeFolhas = processarNumero(qtdDePaginas);
@@ -71,14 +74,17 @@ const atualizarValores = () => {
     tipoFrenteEVerso
   } = obterValoresAtuais();
 
+
   //frente e verso
   tipoFrenteEVerso === 'frenteEVerso' ?
     quantidadeDeFolhas.textContent = `Quantidade de Folhas: ${qtdDeFolhas}` :
     quantidadeDeFolhas.textContent = '';
 
   //encadernação
+  const qtdDeFolhasOuPaginas = seEFrente(tipoFrenteEVerso, qtdDePaginas, qtdDeFolhas);
+
   const precoEncadernacao =
-  tipoEncadernacao === 'comEncadernacao' ? calcularPrecoEncadernacao(qtdDeFolhas) : 0;
+  tipoEncadernacao === 'comEncadernacao' ? calcularPrecoEncadernacao(qtdDeFolhasOuPaginas) : 0;
   tipoEncadernacao === 'comEncadernacao' ?
     valorEncadernacao.textContent =
       `Valor da Encadernação: R$${formatarValor(precoEncadernacao)}` :
@@ -101,7 +107,7 @@ const submitFormulario = () => {
   formulario.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    console.log('Submit clicado:', cor);
+    console.log('Submit clicado');
   });
 };
 
