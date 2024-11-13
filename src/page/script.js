@@ -48,8 +48,8 @@ const calcularValorTotal = (paginas, preco, encadernacao) =>
 
 //Funções para atualizar valores no HTML
 
-const seEFrente = (tipoFrenteEVerso, qtdDePaginas, qtdDeFolhas) =>
-  tipoFrenteEVerso === 'frenteEVerso' ? qtdDeFolhas : qtdDePaginas;
+const seEFrente = (tipo, paginas, folhas) =>
+  tipo === 'frenteEVerso' ? folhas : paginas;
 
 const obterValoresAtuais = () => {
   const qtdDePaginas = parseInt(quantidadeDePaginas?.value) || 0;
@@ -74,7 +74,6 @@ const atualizarValores = () => {
     tipoFrenteEVerso
   } = obterValoresAtuais();
 
-
   //frente e verso
   tipoFrenteEVerso === 'frenteEVerso' ?
     quantidadeDeFolhas.textContent = `Quantidade de Folhas: ${qtdDeFolhas}` :
@@ -85,6 +84,7 @@ const atualizarValores = () => {
 
   const precoEncadernacao =
   tipoEncadernacao === 'comEncadernacao' ? calcularPrecoEncadernacao(qtdDeFolhasOuPaginas) : 0;
+
   tipoEncadernacao === 'comEncadernacao' ?
     valorEncadernacao.textContent =
       `Valor da Encadernação: R$${formatarValor(precoEncadernacao)}` :
