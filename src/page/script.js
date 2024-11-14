@@ -13,6 +13,9 @@ const avisoValorMinimo = document.getElementById('avisoValorMinimo');
 const quantidadeMaxima = 3000;
 const quantidadeMinima = 1;
 const buttonSubmit = document.getElementById('submit');
+const inputNome = document.getElementById('inputNome');
+const inputTelefone = document.getElementById('inputTelefone');
+const inputEmail = document.getElementById('inputEmail');
 
 //Funções para cálculos e formatação de valores
 
@@ -100,13 +103,27 @@ const atualizarValores = () => {
   valorTotal.textContent = `Valor Total: R$${formatarValor(novoValor)}`;
 };
 
+//validações
+const validarEmail = (email) => {
+  const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return regexEmail.test(email);
+};
+
+const validarTelefone = (telefone) => {
+  const regexTelefone = /^\d{2}\d{4,5}-\d{4}$/;
+  return regexTelefone.test(telefone);
+};
+
+const validarNome = (nome) => {
+  const regexNome = /^[A-Za-zÀ-ÿ\s]{6,}$/;
+  return regexNome.test(nome);
+};
 
 //Função para submeter o formulário
 
 const submitFormulario = () => {
   formulario.addEventListener('submit', (event) => {
     event.preventDefault();
-
     console.log('Submit clicado');
   });
 };
@@ -127,7 +144,6 @@ const setarEntrada = () => {
 };
 
 //Eventos
-
 document.addEventListener('DOMContentLoaded', () => {
   quantidadeDePaginas.addEventListener('input', () => {
     setarEntrada();
@@ -144,6 +160,11 @@ document.addEventListener('DOMContentLoaded', () => {
     e.addEventListener('click', () => {
       atualizarValores();
     });
+  });
+
+  inputNome.addEventListener('input', () => {
+    console.log('Nome digitado:', inputNome.value);
+    console.log('Nome válido:', validarNome(inputNome.value));
   });
 
   submitFormulario();
