@@ -11,7 +11,6 @@
         <h1>Impressão e Encadernação</h1>
         <h3>Orçamento</h3>
         <form id="meuFormulario">
-            <label for="product">Simule seu pedido</label>
             <div class="options">
                 <input type="radio" id="pretoEBranco" name="cor" checked />
                 <label for="pretoEBranco">Preto e Branco</label>
@@ -42,6 +41,7 @@
                         <input type="number" id="quantidadeDePaginas" max="3000" min="1" value="1">
                     </label>
                     <small id="avisoValorMaximo" style="color: red; display: none;">O valor máximo é 3000.</small>
+                    <small id="avisoValorMinimo" style="color: red; display: none;">O valor máximo é 1.</small>
                 </section>
                 <br>
             </div>
@@ -54,7 +54,18 @@
             <label for="valor">
                 <h2 id="valorTotal">Valor Total: R$1,00</h2>
             </label>
-            <button type="submit" id="submit" disabled>Enviar Pedido</button>
+            <section class="contatos">
+                <label for="noinputNomeme">Nome: *</label>
+                <input type="text" id="inputNome"  placeholder="Insira seu Nome" name="nome" required>
+                <br>
+                <label for="telefone">Telefone: *</label>
+                <input type="tel" id="inputTelefone" placeholder="Insira seu Telefone" name="telefone" required>
+                <br>
+                <label for="email">Email(opcional):</label>
+                <input type="email" id="inputEmail"  placeholder="Insira seu Email" name="email">
+            </section>
+            <button type="submit" id="submit">Enviar Pedido</button>
+            <p id="mensagemErro" style="color: red; display: none;">Preencha os campos obrigatórios para enviar o orçamento.</p>
         </form>
     </div>
     <script src="./script.js"></script>
