@@ -50,8 +50,8 @@ const calcularValorTotal = (paginas, preco, encadernacao) =>
 //Funções para atualizar valores no HTML
 
 const obterValoresAtuais = () => {
-  let qtdDePaginas = parseInt(quantidadeDePaginas?.value) || 0;
-  let qtdDeFolhas = processarNumero(qtdDePaginas);
+  const qtdDePaginas = parseInt(quantidadeDePaginas?.value) || 0;
+  const qtdDeFolhas = processarNumero(qtdDePaginas);
 
   const tipoEncadernacao = encadernacao.find(e => e.checked)?.id || null;
   const tipoFrenteEVerso = frenteEVerso.find(e => e.checked)?.id || null;
@@ -89,7 +89,7 @@ const atualizarValorTotal = () => {
 
   const precoImpressao = calcularPrecoImpressao(qtdDePaginas);
 
-  let novoValor = calcularValorTotal(qtdDePaginas, precoImpressao, precoEncadernacao);
+  const novoValor = calcularValorTotal(qtdDePaginas, precoImpressao, precoEncadernacao);
 
   valorTotal.textContent = `Valor Total: R$${formatarValor(novoValor)}`;
 };
@@ -111,7 +111,7 @@ const submitFormulario = () => {
   });
 };
 
-const executarFuncoes = () => {
+const atualizarValores = () => {
   atualizarValorEncadernacao();
   atualizarValorImpressao();
   atualizarValorTotal();
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
   quantidadeDePaginas.addEventListener('input', () => {
     const { qtdDeFolhas } = obterValoresAtuais();
 
-    executarFuncoes();
+    atualizarValores();
 
     if (qtdDeFolhas > quantidadeMaxima) {
       quantidadeDePaginas.value = quantidadeMaxima;
@@ -134,19 +134,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  encadernacao.forEach((e) =>
-    e.addEventListener('click', () => {
-      atualizarValorEncadernacao();
-      atualizarValorTotal();
-    })
+  encadernacao.forEach(e => e.addEventListener('click', () => {
+    atualizarValorEncadernacao();
+    atualizarValorTotal();
+  })
   );
 
-  frenteEVerso.forEach((e) => {
-    e.addEventListener('click', () => {
-      frenteEVersoSelecionado();
-      executarFuncoes();
-    });
-  });
+  frenteEVerso.forEach(e => e.addEventListener('click', () => {
+    frenteEVersoSelecionado();
+    atualizarValores();
+  })
+  );
 
   submitFormulario();
 });
