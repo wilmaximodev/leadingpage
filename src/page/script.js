@@ -1,5 +1,4 @@
 //Buscando elementos do HTML
-
 const formulario = document.getElementById('meuFormulario');
 const valorTotal = document.getElementById('valorTotal');
 const valorPorPagina = document.getElementById('valorPorPagina');
@@ -13,12 +12,9 @@ const avisoValorMinimo = document.getElementById('avisoValorMinimo');
 const quantidadeMaxima = 3000;
 const quantidadeMinima = 1;
 const buttonSubmit = document.getElementById('submit');
-const inputNome = document.getElementById('inputNome');
-const inputTelefone = document.getElementById('inputTelefone');
-const inputEmail = document.getElementById('inputEmail');
+const mensagemErro = document.getElementById('mensagemErro');
 
 //Funções para cálculos e formatação de valores
-
 const calcularPrecoImpressao = (qtd) => {
   const precos = [
     { limite: 1000, preco: 0.25 },
@@ -50,7 +46,6 @@ const calcularValorTotal = (paginas, preco, encadernacao) =>
   paginas * preco + encadernacao;
 
 //Funções para atualizar valores no HTML
-
 const seEFrente = (tipo, paginas, folhas) =>
   tipo === 'frenteEVerso' ? folhas : paginas;
 
@@ -103,31 +98,6 @@ const atualizarValores = () => {
   valorTotal.textContent = `Valor Total: R$${formatarValor(novoValor)}`;
 };
 
-//validações
-const validarEmail = (email) => {
-  const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  return regexEmail.test(email);
-};
-
-const validarTelefone = (telefone) => {
-  const regexTelefone = /^\d{2}\d{4,5}-\d{4}$/;
-  return regexTelefone.test(telefone);
-};
-
-const validarNome = (nome) => {
-  const regexNome = /^[A-Za-zÀ-ÿ\s]{6,}$/;
-  return regexNome.test(nome);
-};
-
-//Função para submeter o formulário
-
-const submitFormulario = () => {
-  formulario.addEventListener('submit', (event) => {
-    event.preventDefault();
-    console.log('Submit clicado');
-  });
-};
-
 const setarEntrada = () => {
   const { qtdDeFolhas } = obterValoresAtuais();
 
@@ -141,6 +111,12 @@ const setarEntrada = () => {
   if (qtdDeFolhas < quantidadeMinima) {
     quantidadeDePaginas.value = quantidadeMinima;
   }
+};
+
+//Formulário
+const submitFormulario = (event) => {
+  event.preventDefault();
+  console.log('Formulário Clicado:');
 };
 
 //Eventos
@@ -162,10 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  inputNome.addEventListener('input', () => {
-    console.log('Nome digitado:', inputNome.value);
-    console.log('Nome válido:', validarNome(inputNome.value));
-  });
+  formulario.addEventListener('submit', (event) => submitFormulario(event));
 
-  submitFormulario();
 });
