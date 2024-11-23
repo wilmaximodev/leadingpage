@@ -113,11 +113,19 @@ const setarEntrada = () => {
   }
 };
 
-//Formulário
+
 const submitFormulario = (event) => {
   event.preventDefault();
-  console.log('Formulário Clicado:');
+  const idEncadernacao = encadernacao.find(e => e.checked).id;
+  const textoEncadernacao =
+    document.querySelector(`label[for="${idEncadernacao}"]`);
+  const labelText = textoEncadernacao ? textoEncadernacao.textContent : null;
+
+
+  console.log(labelText); // Imprime o texto da label
+  console.log('Formulário Clicado:', encadernacao.find(e => e.checked));
 };
+
 
 //Eventos
 document.addEventListener('DOMContentLoaded', () => {
