@@ -7,6 +7,7 @@ const quantidadeDePaginas = document.getElementById('quantidadeDePaginas');
 const quantidadeDeFolhas = document.getElementById('quantidadeDeFolhas');
 const encadernacao = [...document.getElementsByName('encadernacao')];
 const frenteEVerso = [...document.getElementsByName('lado')];
+const cor = [...document.getElementsByName('cor')];
 const avisoValorMaximo = document.getElementById('avisoValorMaximo');
 const avisoValorMinimo = document.getElementById('avisoValorMinimo');
 const quantidadeMaxima = 3000;
@@ -113,11 +114,20 @@ const setarEntrada = () => {
   }
 };
 
-//Formulário
+const buscarTexto = (id) => {
+  const texto = document.querySelector(`label[for="${id}"]`);
+  return texto ? texto.textContent : null;
+};
+
 const submitFormulario = (event) => {
   event.preventDefault();
-  console.log('Formulário Clicado:');
+  const idEncadernacao = buscarTexto(encadernacao.find(e => e.checked).id);
+  const idFrenteEVerso = buscarTexto(frenteEVerso.find(e => e.checked).id);
+  const idColorido = buscarTexto(cor.find(e => e.checked).id);
+
+  console.log(`Olá, você solicitou um orçamento para ${quantidadeDePaginas.value} páginas, ${idEncadernacao}, ${idFrenteEVerso} e ${idColorido}.`);
 };
+
 
 //Eventos
 document.addEventListener('DOMContentLoaded', () => {
