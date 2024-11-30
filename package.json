@@ -1,31 +1,24 @@
 {
   "name": "leadingpage",
   "version": "1.0.0",
-  "description": "Pasta criada para os arquivos do projeto de leading page para o site da lan house Resolve no Digital",
-  "main": "index.js",
+  "description": "Calculadora de impressões",
+  "main": "index.html",
   "scripts": {
-    "test": "test",
-    "lint": "eslint ."
-  },
-  "author": "Wilson Maximus",
-  "license": "ISC",
-  "devDependencies": {
-    "@eslint/js": "^9.13.0",
-    "eslint": "^9.13.0",
-    "eslint-plugin-react": "^7.37.2",
-    "globals": "^15.11.0"
+    "test": "test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wilmaximodev/leadingpage.git"
+    "url": "git+ssh://git@github.com/wilmaximodev/leadingpage.git"
   },
-  "keywords": [],
+  "author": "Wilson Maximo",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/wilmaximodev/leadingpage/issues"
   },
   "homepage": "https://github.com/wilmaximodev/leadingpage#readme",
-  "dependencies": {
-    "eslint-config-trybe-fundamentals": "^1.1.1",
-    "lint": "^1.1.2"
+  "devDependencies": {
+    "@eslint/js": "^9.16.0",
+    "eslint": "^9.16.0",
+    "globals": "^15.12.0"
   }
 }

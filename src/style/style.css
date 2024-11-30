@@ -43,10 +43,9 @@ h3 {
     margin: 15px 0;
 }
 
-/* Estilização do formulário */
 form {
     display: flex;
-    flex-direction: column; /* Alinha os itens verticalmente */
+    flex-direction: column;
 }
 
 input:disabled {
@@ -55,10 +54,9 @@ input:disabled {
   }
 
 label {
-    margin-bottom: 10px; /* Espaço entre os labels */
+    margin-bottom: 10px;
 }
 
-/* Estilização das opções de entrada */
 .options {
     margin: 20px 0;
     padding: 15px;
@@ -71,7 +69,6 @@ input[type="radio"] {
     margin-right: 10px; /* Espaço à direita dos inputs */
 }
 
-/* Estilização dos inputs */
 input[type="number"] {
     width: 60px; /* Largura do input */
     padding: 5px; /* Preenchimento */
@@ -79,7 +76,6 @@ input[type="number"] {
     border-radius: 4px; /* Bordas arredondadas */
 }
 
-/* Estilização da seção de imagens */
 .image-section {
     display: flex; /* Layout flexível para as imagens */
     justify-content: space-around; /* Espaço entre as imagens */
@@ -98,13 +94,11 @@ input[type="number"] {
     
 }
 
-/* Estilização do valor total */
 label[for="valor"] {
     margin-top: 20px;
     font-weight: bold; /* Negrito para o valor total */
 }
 
-/* Estilização do botão */
 button {
     background-color: #4a90e2; /* Cor de fundo do botão */
     color: white; /* Cor do texto do botão */

@@ -1,4 +1,3 @@
-//Buscando elementos do HTML
 const formulario = document.getElementById('meuFormulario');
 const valorTotal = document.getElementById('valorTotal');
 const valorPorPagina = document.getElementById('valorPorPagina');
@@ -9,16 +8,12 @@ const encadernacao = [...document.getElementsByName('encadernacao')];
 const frenteEVerso = [...document.getElementsByName('lado')];
 const cor = [...document.getElementsByName('cor')];
 const avisoValorMaximo = document.getElementById('avisoValorMaximo');
-const avisoValorMinimo = document.getElementById('avisoValorMinimo');
-const quantidadeMaxima = 3000;
+const quantidadeMaxima = 500;
 const quantidadeMinima = 1;
-const buttonSubmit = document.getElementById('submit');
-const mensagemErro = document.getElementById('mensagemErro');
 
 //Funções para cálculos e formatação de valores
 const calcularPrecoImpressao = (qtd) => {
   const precos = [
-    { limite: 1000, preco: 0.25 },
     { limite: 500, preco: 0.40 },
     { limite: 150, preco: 0.45 },
     { limite: 50, preco: 0.50 },
@@ -33,7 +28,6 @@ const calcularPrecoEncadernacao = (qtd) => {
     { limite: 149, preco: 10.00 },
     { limite: 249, preco: 15.00 },
     { limite: 500, preco: 25.00 },
-    { limite: 1000, preco: 45.00 },
   ];
   const faixa = precos.find(({ limite }) => qtd <= limite);
   return faixa ? faixa.preco : 6.00;
@@ -67,7 +61,7 @@ const obterValoresAtuais = () => {
 
 const atualizarValores = () => {
   const {
-    qtdDePaginas,
+    qtdDePaginas ,
     qtdDeFolhas,
     tipoEncadernacao,
     tipoFrenteEVerso
@@ -124,8 +118,16 @@ const submitFormulario = (event) => {
   const idEncadernacao = buscarTexto(encadernacao.find(e => e.checked).id);
   const idFrenteEVerso = buscarTexto(frenteEVerso.find(e => e.checked).id);
   const idColorido = buscarTexto(cor.find(e => e.checked).id);
+  const nome = document.getElementById('inputNome').value;
+  const numero = document.getElementById('inputTelefone').value;
+  const email = document.getElementById('inputEmail')?.value;
 
-  console.log(`Olá, você solicitou um orçamento para ${quantidadeDePaginas.value} páginas, ${idEncadernacao}, ${idFrenteEVerso} e ${idColorido}.`);
+  alert(`Olá ${nome}, você solicitou um orçamento para ${quantidadeDePaginas.value} páginas, ${idEncadernacao}, ${idFrenteEVerso} e ${idColorido}.
+    
+    Orçamento no ${valorTotal.textContent}.
+    
+    Em breve entraremos em contato :)`);
+  formulario.reset();
 };
 
 
