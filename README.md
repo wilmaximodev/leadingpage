@@ -83,7 +83,7 @@ JavaScript: Lógica para os cálculos e interatividade.
 # 🚀 Como Rodar o Projeto
 Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/impressao-encadernacao.git
+git clone git@github.com:wilmaximodev/leadingpage.git
 ```
 Abra o arquivo index.html no seu navegador.
 # 🧑‍💻 Contribuições
