@@ -77,7 +77,9 @@ Estrutura do diretório:
 ```
 # 🌐 Tecnologias Utilizadas
 HTML5: Estruturação semântica da página.
+
 CSS3: Estilização moderna, responsiva e agradável.
+
 JavaScript: Lógica para os cálculos e interatividade.
 
 # 🚀 Como Rodar o Projeto
