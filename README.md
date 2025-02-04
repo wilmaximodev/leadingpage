@@ -39,6 +39,8 @@ Informe seu nome, telefone e e-mail.
 Finalize o pedido:
 
 Clique em Enviar Pedido para enviar o orçamento.
+Fique tranquilo, os dados não serão enviados! Teste com informações aleatórias se não estiver confortável ;)
+
 💵 Regras de Preços
 💳 Valor por página:
 
