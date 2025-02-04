@@ -90,12 +90,13 @@ Clone o repositório:
 ```bash
 git clone git@github.com:wilmaximodev/leadingpage.git
 ```
+Abra o arquivo index.html no seu navegador.
+
 
 ## Veja Funcionando:
 Basta clicar no link abaixo para testar a página:
 https://wilmaximodev.github.io/leadingpage/
 
-Abra o arquivo index.html no seu navegador.
 # 🧑‍💻 Contribuições
 Se você deseja contribuir com este projeto, siga os passos abaixo:
 
