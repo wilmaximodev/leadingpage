@@ -85,6 +85,8 @@ CSS3: Estilização moderna, responsiva e agradável.
 
 JavaScript: Lógica para os cálculos e interatividade.
 
+ESLint: Para garantir a qualidade e consistência do código JavaScript, aplicando regras de estilo e melhores práticas.
+
 # 🚀 Como Rodar o Projeto
 Clone o repositório:
 ```bash
