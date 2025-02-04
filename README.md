@@ -42,8 +42,8 @@ Clique em Enviar Pedido para enviar o orçamento.
 
 Fique tranquilo, os dados não serão enviados! Teste com informações aleatórias se não estiver confortável ;)
 
-💵 Regras de Preços
-💳 Valor por página:
+## 💵 Regras de Preços
+## 💳 Valor por página:
 
 Até 49 páginas: R$1,00 por página. 
 
