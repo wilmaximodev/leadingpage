@@ -1,0 +1,72 @@
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Formulário de Orçamento</title>
+        <link rel="stylesheet" href="./src/style/style.css">
+    </head>
+    <body>
+        <div class="leadingpage">
+            <h1>Impressão e Encadernação</h1>
+            <form id="meuFormulario">
+                <div class="options">
+                    <input type="radio" id="pretoEBranco" name="cor" aria-labelledby="labelPretoEBranco" checked />
+                    <label for="pretoEBranco" id="labelPretoEBranco">Preto e Branco</label>
+
+                    <input type="radio" id="colorido" name="cor" aria-labelledby="labelColorido"/>
+                    <label for="colorido" id="labelColorido">Colorido</label>
+
+                    <br>
+                    <input type="radio" id="frente" name="lado" aria-labelledby="labelFrente" checked />
+                    <label for="frente" id="labelFrente">Só Frente</label>
+                    
+                    <input type="radio" id="frenteEVerso" name="lado" aria-labelledby="labelFrenteEVerso"/>
+                    <label for="frenteEVerso" id="labelFrenteEVerso">Frente e Verso</label>
+                    
+                    <br>
+                    <input type="radio" id="semEncadernacao" name="encadernacao" aria-labelledby="labelSemEncadernacao" checked />
+                    <label for="semEncadernacao" id="labelSemEncadernacao">Sem Encadernação</label>
+                    
+                    <input type="radio" id="comEncadernacao" name="encadernacao" aria-labelledby="labelComEncadernacao"/>
+                    <label for="comEncadernacao" id="labelComEncadernacao">Com Encadernação</label>
+
+                    <section class="saidaDeValores">
+                        <h3 id="valorPorPagina">Valor por Página: R$1,00</h3>
+                        <h3 id="valorEncadernacao"></h3>
+                        <p id="quantidadeDeFolhas"></p>
+                        <label for="quantidadeDePaginas">
+                                <p>
+                                    Quantidade de Páginas:
+                                </p>
+                            <input type="number" id="quantidadeDePaginas" max="500" min="1" value="1">
+                        </label>
+                        <small id="avisoValorMaximo" style="color: red; display: none;"></small>
+                    </section>
+                    <br>
+                </div>
+
+                <section class="image-section">
+                    <img src="./src/img/encadernacao.jpg" alt="encadernacao" id="img1"/>   
+                    <img src="./src/img/colorida.jpg" alt="Descrição da Imagem 2" id="img2"/>
+                    <img src="./src/img/peb.png" alt="Descrição da Imagem 3" id="img3" />
+                </section>
+                <label for="valor">
+                    <h2 id="valorTotal">Valor Total: R$1,00</h2>
+                </label>
+                <section class="contatos">
+                    <label for="inputNome">Nome: *</label>
+                    <input type="text" id="inputNome"  placeholder="Insira seu Nome" name="nome" required>
+                    <br>
+                    <label for="telefone">Telefone: *</label>
+                    <input type="tel" id="inputTelefone" placeholder="(XX) XXXXX-XXXX"  name="telefone" required>
+                    <br>
+                    <label for="email">Email(opcional):</label>
+                    <input type="email" id="inputEmail"  placeholder="Insira seu Email" name="email">
+                </section>
+                <button type="submit" id="submit">Enviar Pedido</button>
+            </form>
+        </div>
+        <script src="./src/script/script.js"></script>
+    </body>
+    </html>
