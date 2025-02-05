@@ -157,3 +157,32 @@ button:active {
     align-items: center;
     width: 100%;
 }
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .options {
+        padding: 10px;
+    }
+
+    .image-section img {
+        width: 70px;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 12px;
+    }
+}
