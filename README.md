@@ -112,5 +112,6 @@ Abra um pull request explicando suas modificações.
 Este projeto está licenciado sob a MIT License.
 
 # 🖼️ Imagens
-![image](https://github.com/user-attachments/assets/b356f3c0-e920-4e53-b3ce-078632f9f40b)
+![image](https://github.com/user-attachments/assets/0c47f893-b86a-4e1e-99c2-7afa608588ac)
+
 
