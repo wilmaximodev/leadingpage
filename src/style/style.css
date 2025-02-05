@@ -19,7 +19,7 @@ body {
 }
 
 /* Estilização do container principal */
-div {
+.leadingpage {
     max-width: 800px;
     width: 100%;
     background: rgba(94, 179, 228, 0.459);
@@ -160,7 +160,7 @@ button:active {
 
 /* Responsividade */
 @media (max-width: 600px) {
-    div {
+    .leadingpage {
         width: 90%;
         padding: 20px;
     }
