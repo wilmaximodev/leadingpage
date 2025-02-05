@@ -160,7 +160,7 @@ button:active {
 
 /* Responsividade */
 @media (max-width: 600px) {
-    .container {
+    div {
         width: 90%;
         padding: 20px;
     }
