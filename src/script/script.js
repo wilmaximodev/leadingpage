@@ -144,7 +144,10 @@ const setarEntrada = () => {
   }
 
   if (qtdDeFolhas < quantidadeMinima) {
-    quantidadeDePaginas.value = quantidadeMinima;
+    avisoValorMaximo.textContent = `O valor mínimo permitido é ${quantidadeMinima}.`;
+    avisoValorMaximo.style.display = 'inline';
+  } else {
+    avisoValorMaximo.style.display = 'none';
   }
 };
 
